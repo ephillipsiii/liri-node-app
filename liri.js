@@ -6,13 +6,13 @@ var keys = require("./keys.js");
 //dependency for fs
 var fs = require('fs');
 //dependecy for twitter npm
-var twitter = require('twitter');
+var Twitter = require('twitter');
 //dependency for request npm
 var request = require('request');
 // dependecy for spotify npm
 var spotify = require('node-spotify-api');
 //assigning twitter keys to a var via .env
-var client = new twitter(keys.twitter);
+var client = new Twitter(keys.Twitter);
 
 //taking user inputs in an array for the command line so that user input would resemble: "node filename.js + input 2 + input 3"
 var input = process.argv;
@@ -59,13 +59,13 @@ function twitter(inputs) {
 // //spotify function
 function spotify(inputs) {
     //establishes permissions with spotify keys
-    var spotify = new Spotify(keys.spotify);
+    var spotify = new Spotify(keys.Spotify);
     // if no inputes, then return Ace of Base (thanks for getting this stuck in my head btw)
     if (!inputs){
         inputs = "The Sign";
     }
     //searches the spotify api and returns the function
-    spotify.search({ type: 'track', query: inputs }, function(err, data) {
+    Spotify.search({ type: 'track', query: inputs }, function(err, data) {
         // if an error, log the error
         if(err){
             console.log(err);
