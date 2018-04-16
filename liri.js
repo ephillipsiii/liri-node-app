@@ -1,6 +1,6 @@
 // setting variables for global scope
 //saving the dotenv
-var dotenv = require("dotenv").config();
+require("dotenv").config();
 //requiring the keys.js file
 var keys = require("./keys.js");
 //dependency for fs
@@ -10,7 +10,7 @@ var Twitter = require('twitter');
 //dependency for request npm
 var request = require('request');
 // dependecy for spotify npm
-var spotify = require('node-spotify-api');
+var Spotify = require('node-spotify-api');
 //assigning twitter keys to a var via .env
 var client = new Twitter(keys.Twitter);
 
@@ -23,11 +23,11 @@ var inputs = input[3];
 
 switch (action) {
     case "my-tweets":
-    twitter(inputs);
+    Twitter(inputs);
     break;
     
     case "spotify-this-song":
-    spotify(inputs);
+    Spotify(inputs);
     break;
 
     case "movie-this":
@@ -40,7 +40,7 @@ switch (action) {
 }
 
 //twitter function
-function twitter(inputs) {
+function Twitter(inputs) {
     //setting paramaters to return from twitter 
     var params = {screen_name: inputs, count: 20};
     //establishing permissions and getting timeline, paramters from twitter, passing the function with an error conditional, the tweets, and a respone from api
@@ -57,9 +57,9 @@ function twitter(inputs) {
         })
 }
 // //spotify function
-function spotify(inputs) {
+function Spotify(inputs) {
     //establishes permissions with spotify keys
-    var spotify = new Spotify(keys.Spotify);
+    var Spotify = new Spotify(keys.Spotify);
     // if no inputes, then return Ace of Base (thanks for getting this stuck in my head btw)
     if (!inputs){
         inputs = "The Sign";
@@ -112,7 +112,7 @@ function doIt(){
         }
         // puts the data into an array and splits each array object with a comma
         var dataArray = data.split(",");
-        //if spotify is called, put the data into an array and run through the items in the array
+        //if spotify is called, put the data into an array and run through the items in the array and vice versa for twitter and omdb
         if(dataArray[0] === "spotify-this-song"){
             var songcheck = dataArray[1].slice();
             spotify(songcheck);
